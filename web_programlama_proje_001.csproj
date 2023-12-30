@@ -6,11 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Giris\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\Doktor\" />
-    <Folder Include="Views\Randevu\" />
-  </ItemGroup>
-
 </Project>

@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace web_programlama_proje_001.Models
+namespace web_programlama_proje_001.ViewModels
 {
-    public class AnaBilimDali
+    public class EditAnaBilimDaliViewModel
     {
-        [Key]
+
         public int AnaBilimDaliId { get; set; }
 
+        [Required(ErrorMessage = "Name is required.")]
         public string Name { get; set; }
-
-        public List<Poliklinik> Poliklinikler { get; set; }
     }
 }

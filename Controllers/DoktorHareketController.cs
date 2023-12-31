@@ -2,7 +2,7 @@
 
 namespace web_programlama_proje_001.Controllers
 {
-    public class AdminController : Controller
+    public class DoktorHareketController : Controller
     {
         public IActionResult Index()
         {

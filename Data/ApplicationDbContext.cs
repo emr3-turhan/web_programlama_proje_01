@@ -5,16 +5,23 @@ namespace web_programlama_proje_001.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
         }
+        public DbSet<AnaBilimDali> AnaBilimDalis { get; set; }
+        
+        public DbSet<Doktor> Doktors { get; set; }
 
-        public DbSet<Doktor> Doktorlar { get; set; }
-        public DbSet<Hasta> Hastalar { get; set; }
-        public DbSet<Admin> Adminler { get; set; }
-        public DbSet<AnaBilimDali> AnaBilimDallari { get; set; }
-        public DbSet<Poliklinik> Poliklinikler { get; set; }
-        public DbSet<CalismaSaati> CalismaSaatleri { get; set; }
-        public DbSet<Randevu> Randevular { get; set; }
+        public DbSet<DoktorHareket> DoktorHarekets { get; set; }
+
+        public DbSet<Hasta> Hastas { get; set; }
+
+        public DbSet<Kullanici> Kullanicis {  get; set; }
+
+        public DbSet<Poliklinik> Polikliniks { get; set; }
+
+        public DbSet<Randevu> Randevus { get; set; }
+
+        public DbSet<Rol> Rols { get; set; }
+        public object AnaBilimDallari { get; internal set; }
     }
 }

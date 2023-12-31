@@ -1,0 +1,40 @@
+﻿@model IEnumerable<AnaBilimDali>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<h2>Ana Bilim Dalları</h2>
+
+<p>
+    <a asp-action="Create">Yeni Ana Bilim Dali Ekle</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <!-- Diğer sütunlar buraya eklenebilir -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var anaBilimDali in Model)
+        {
+            <tr>
+                <td>@anaBilimDali.AnaBilimDaliId</td>
+                <td>@anaBilimDali.Name</td>
+                <!-- Diğer sütunlar buraya eklenebilir -->
+                <td>
+                    <a asp-action="Details" asp-route-id="@anaBilimDali.AnaBilimDaliId">Detay</a> |
+                    <a asp-action="Edit" asp-route-id="@anaBilimDali.AnaBilimDaliId">Düzenle</a> |
+                    <a asp-action="Delete" asp-route-id="@anaBilimDali.AnaBilimDaliId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

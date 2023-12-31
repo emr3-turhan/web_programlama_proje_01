@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using web_programlama_proje_001.ViewModels;
+@model EditAnaBilimDaliViewModel
+
+<h2>Edit Ana Bilim Dali</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="AnaBilimDaliId" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <!-- Diğer özellikler buraya eklenebilir -->
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

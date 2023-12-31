@@ -1,16 +1,19 @@
-﻿namespace web_programlama_proje_001.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace web_programlama_proje_001.Models
 {
     public class Doktor
     {
-        public int Id { get; set; }
-        public string Adi { get; set; }
-        public string Soyadi { get; set; }
+        [Key]
+        public int DoktorId { get; set; }
 
+        public string Name { get; set; }
+
+        [ForeignKey("Poliklinik")]
         public int PoliklinikId { get; set; }
-        public virtual Poliklinik Poliklinik { get; set; }
+        
+        public Poliklinik Poliklinik { get; set; }
 
-        public virtual ICollection<CalismaSaati> CalismaSaatleri { get; set; }
-
-        public virtual Kullanici Kullanici { get; set; }
     }
 }

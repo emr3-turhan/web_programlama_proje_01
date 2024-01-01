@@ -1,0 +1,31 @@
+﻿@using web_programlama_proje_001.ViewModels
+@model IEnumerable<DetailsDoktorViewModel>
+
+
+<h2>Doktor Liste</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Poliklinik</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doktor in Model)
+        {
+            <tr>
+                <td>@doktor.DoktorId</td>
+                <td>@doktor.Name</td>
+                <td>@doktor.PoliklinikAdi</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@doktor.DoktorId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@doktor.DoktorId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@doktor.DoktorId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

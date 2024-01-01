@@ -1,0 +1,20 @@
+﻿@using web_programlama_proje_001.ViewModels;
+@model DeleteDoktorViewModel
+
+<h2>Delete Doktor</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">ID</dt>
+    <dd class="col-sm-10">@Model.DoktorId</dd>
+
+    <dt class="col-sm-2">Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Poliklinik</dt>
+    <dd class="col-sm-10">@Model.PoliklinikAdi</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="DoktorId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>

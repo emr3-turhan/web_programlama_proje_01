@@ -1,0 +1,22 @@
+﻿@using web_programlama_proje_001.ViewModels
+@model EditDoktorViewModel
+
+<h2>Edit Doktor</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="DoktorId" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PoliklinikId"></label>
+        @* <select asp-for="PoliklinikId" asp-items="Model.Poliklinik" class="form-control"></select> *@
+        <span asp-validation-for="PoliklinikId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

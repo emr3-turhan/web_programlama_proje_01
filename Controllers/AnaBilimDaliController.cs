@@ -20,73 +20,78 @@ namespace web_programlama_proje_001.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<AnaBilimDali> anaBilimDaliList = await _anaBilimDaliRepository.GetAll();
-            return View(anaBilimDaliList);
+            IEnumerable<AnaBilimDali> AnaBilimDalis = await _anaBilimDaliRepository.GetAll();
+            return View(AnaBilimDalis);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(CreateAnaBilimDaliViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var anaBilimDali = new AnaBilimDali
-                {
-                    Name = viewModel.Name
-                };
-
-                _anaBilimDaliRepository.Add(anaBilimDali);
-                return RedirectToAction("Index");
-            }
-
-            return View(viewModel);
-        }
-
-        public async Task<IActionResult> Edit(int id)
-        {
-            var anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
+            // Id'ye göre AnaBilimDali'yi bul
+            AnaBilimDali anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
 
             if (anaBilimDali == null)
             {
                 return NotFound();
             }
 
-            var editViewModel = new EditAnaBilimDaliViewModel
+            // AnaBilimDali modelini DetailsAnaBilimDaliViewModel'e dönüştür
+            var viewModel = new DetailsAnaBilimDaliViewModel
             {
                 AnaBilimDaliId = anaBilimDali.AnaBilimDaliId,
-                Name = anaBilimDali.Name
-                // Diğer özellikleri buraya ekleyebilirsiniz
+                Name = anaBilimDali.Name,
+                // Diğer özellikleri ekle...
             };
 
-            return View(editViewModel);
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            AnaBilimDali anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
+
+            if (anaBilimDali == null)
+            {
+                return NotFound();
+            }
+
+            // AnaBilimDali modelini EditAnaBilimDaliViewModel'e dönüştür
+            var viewModel = new EditAnaBilimDaliViewModel
+            {
+                AnaBilimDaliId = anaBilimDali.AnaBilimDaliId,
+                Name = anaBilimDali.Name,
+                // Diğer özellikleri ekleyebilirsiniz...
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(EditAnaBilimDaliViewModel editViewModel)
+        public async Task<IActionResult> Edit(EditAnaBilimDaliViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                var anaBilimDali = new AnaBilimDali
+                // ViewModel'i AnaBilimDali modeline dönüştür
+                AnaBilimDali anaBilimDali = new AnaBilimDali
                 {
-                    AnaBilimDaliId = editViewModel.AnaBilimDaliId,
-                    Name = editViewModel.Name
-                    // Diğer özellikleri buraya ekleyebilirsiniz
+                    AnaBilimDaliId = viewModel.AnaBilimDaliId,
+                    Name = viewModel.Name,
+                    // Diğer özellikleri ekleyebilirsiniz...
                 };
 
+                // Düzenlenmiş AnaBilimDali'yi güncelle
                 _anaBilimDaliRepository.Update(anaBilimDali);
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = viewModel.AnaBilimDaliId });
             }
 
-            return View(editViewModel);
+            // ModelState geçerli değilse, formu tekrar göster
+            return View(viewModel);
         }
-
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
+            AnaBilimDali anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
 
             if (anaBilimDali == null)
             {
@@ -97,18 +102,48 @@ namespace web_programlama_proje_001.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var anaBilimDali = _anaBilimDaliRepository.GetByIdAsync(id).Result;
+            AnaBilimDali anaBilimDali = await _anaBilimDaliRepository.GetByIdAsync(id);
 
-            if (anaBilimDali != null)
+            if (anaBilimDali == null)
             {
-                _anaBilimDaliRepository.Delete(anaBilimDali);
+                return NotFound();
+            }
+
+            // AnaBilimDali'yi sil
+            _anaBilimDaliRepository.Delete(anaBilimDali);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(CreateAnaBilimDaliViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                AnaBilimDali yeniAnaBilimDali = new AnaBilimDali
+                {
+                    Name = model.Name
+                    // Diğer özellikleri ekleyebilirsiniz...
+                };
+
+                _anaBilimDaliRepository.Add(yeniAnaBilimDali);
+
                 return RedirectToAction("Index");
             }
 
-            return NotFound();
+            return View(model);
         }
+
+
+
     }
 
 

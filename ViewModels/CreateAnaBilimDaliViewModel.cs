@@ -4,7 +4,7 @@ namespace web_programlama_proje_001.ViewModels
 {
     public class CreateAnaBilimDaliViewModel
     {
-        [Required(ErrorMessage = "Name is required.")]
+        
         public string Name { get; set; }
 
     }

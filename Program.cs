@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using web_programlama_proje_001.Data;
+using web_programlama_proje_001.Interfaces;
+using web_programlama_proje_001.Repositories;
 //using web_programlama_proje_001.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IAnaBilimDaliRepository , AnaBilimDaliRepository>();
+builder.Services.AddScoped<IPoliklinikRepository , PoliklinikRepository>();
+builder.Services.AddScoped<IDoktorRepository , DoktorRepository>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

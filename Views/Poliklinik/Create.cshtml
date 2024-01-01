@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using web_programlama_proje_001.ViewModels
+@model CreatePoliklinikViewModel
+
+<h2>Create Poliklinik</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AnaBilimDaliId" class="control-label"></label>
+        <select asp-for="AnaBilimDaliId" asp-items="ViewBag.AnaBilimDaliList" class="form-control"></select>
+        <span asp-validation-for="AnaBilimDaliId" class="text-danger"></span>
+    </div>
+    <!-- Diğer gerekli alanları ekleyebilirsiniz -->
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
